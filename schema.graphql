@@ -4,6 +4,7 @@
 
 type Account @entity {
   id: ID! #this primary key is set as the toAddress
+  myToAddress: [Transfer] @derivedFrom(field:"to")
 }
 
 type Transfer @entity {

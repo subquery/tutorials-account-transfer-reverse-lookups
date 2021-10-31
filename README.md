@@ -2,16 +2,16 @@
 
 SubQuery powers the next generation of Polkadot dApps by allowing developers to extract, transform and query blockchain data in real time using GraphQL. In addition to this, SubQuery provides production quality hosting infrastructure to run these projects in.
 
-# SubQuery Example - Account transfers
+# SubQuery Example - Account transfers Reverse Lookup
 
-This subquery example indexes the amount transferred of each account and it is an example of a 1-many entity relationshp. In other words, one account can have many receiving addresses.
+This subquery example adds a reverse lookup field on Account.myToAddress meaning that it is accessible from the Account entity but is just a reference or pointer back to Transfer.to.
 
 # Getting Started
 
 ### 1. Clone the entire subql-example repository
 
 ```shell
-git clone https://github.com/subquery/tutorials-account-transfers.git
+git clone https://github.com/subquery/tutorials-account-transfer-reverse-lookups.git
 
 ```
 
@@ -48,16 +48,17 @@ Open http://localhost:3000/ on your browser
 
 ```shell
 query{
-  transfers(first: 3){
+  accounts(first:5){
     nodes{
       id
-      amount
-      blockNumber
-      to{
-        id
-      }
+      myToAddress{
+        nodes{
+          id
+          amount
+        }
       }
     }
   }
+}
 ```
 
